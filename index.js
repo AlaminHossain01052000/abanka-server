@@ -8,7 +8,13 @@ const port = process.env.port || 5000;
 app.use(cors());
 app.use(express.json());
 const uri = "mongodb+srv://abanka:l3R3DdCyIDr0NCpl@cluster0.li11u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    connectTimeoutMS: 30000, // Adjust the timeout values as needed
+    socketTimeoutMS: 30000,
+  });
+  
 async function run() {
     await client.connect();
     console.log("client connected");
